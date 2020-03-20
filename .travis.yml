@@ -4,7 +4,7 @@ go:
     - "1.x"
 
 before_script:
-    - go get .
+    - make install_dependencies
 
 script: 
     - go test -v
