@@ -2,7 +2,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/jessevdk/go-flags"
@@ -13,7 +12,8 @@ type options struct {
 	Passphrase      string `short:"p" long:"passphrase" description:"Passphrase to encode into PBKDF2"`
 	Salt            string `short:"s" long:"salt" description:"Salt"`
 	DigestAlgorithm string `short:"d" long:"digest-algorithm" default:"sha512" description:"Digest algorithm, eg. sha512"`
-	DigestRounds    int    `short:"r" long:"digest-rounds" default:"6000" description:"Number of rounds of a digest algorithm eg. 6000"`
+	DigestRounds    int    `short:"r" long:"digest-rounds" default:"12000" description:"Number of rounds of a digest algorithm eg. 6000"`
+	KeyLength       int    `short:"l" long:"length" default:"128" description:"Length of the key"`
 }
 
 func main() {
@@ -21,7 +21,6 @@ func main() {
 	p := flags.NewParser(&opts, flags.Default&^flags.HelpFlag)
 	_, err := p.Parse()
 	if err != nil {
-		fmt.Printf("fail to parse args: %v", err)
 		os.Exit(1)
 	}
 	if opts.Help {
@@ -29,5 +28,18 @@ func main() {
 		os.Exit(0)
 	}
 
-	println(EncodePasswordToPBKDF2(opts.Passphrase, opts.Salt, opts.DigestRounds, 16, opts.DigestAlgorithm))
+	if opts.Passphrase == "" || opts.Salt == "" {
+		println("Error: salt and passphrase are mandatory")
+		os.Exit(1)
+	}
+
+	hashed, err := EncodePasswordToPBKDF2(opts.Passphrase, opts.Salt, opts.DigestRounds, opts.KeyLength, opts.DigestAlgorithm)
+
+	if err != nil {
+		println("Error: ", err.Error())
+		os.Exit(1)
+	}
+
+	println(hashed)
+	os.Exit(0)
 }
