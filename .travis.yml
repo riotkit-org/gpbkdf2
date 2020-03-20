@@ -3,7 +3,6 @@ go:
     - "1.14"
     - "1.x"
 
-script: go test -v
-
-addons:
-  artifacts: true
+script: 
+    - go test -v
+    - make all
