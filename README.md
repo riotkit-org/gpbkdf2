@@ -4,7 +4,10 @@ gpbkdf2
 Single-binary, tiny and fast shell application for encoding passwords using [Password Based Key Deriviation Function 2 (PBKDF2)](https://en.wikipedia.org/wiki/PBKDF2).
 
 ```
-PBKDF2 applies a pseudorandom function, such as hash-based message authentication code (HMAC), to the input password or passphrase along with a salt value and repeats the process many times to produce a derived key, which can then be used as a cryptographic key in subsequent operations. The added computational work makes password cracking much more difficult, and is known as key stretching.
+PBKDF2 applies a pseudorandom function, such as hash-based message authentication code (HMAC), to the input password or
+passphrase along with a salt value and repeats the process many times to produce a derived key, which can then be used as
+a cryptographic key in subsequent operations. The added computational work makes password cracking much more difficult, 
+and is known as key stretching.
 ```
 
 Source: Wikipedia
