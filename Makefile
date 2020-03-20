@@ -9,3 +9,6 @@ build_armv7:
 
 install_dependencies:
 	go get -t .
+
+test:
+	go test -v
