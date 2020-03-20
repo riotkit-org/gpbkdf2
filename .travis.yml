@@ -3,6 +3,4 @@ go:
     - "1.14"
     - "1.x"
 
-script: 
-    - go test -v
-    - make all
+script: go test -v
